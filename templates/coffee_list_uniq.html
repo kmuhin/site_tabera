@@ -1,0 +1,65 @@
+<head>
+    <title>Прайс кофе табера</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="jQuery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+<script> 
+$(document).ready(function() {
+    $('#table-goods').DataTable({
+    "order": [[ 1, "asc" ]],
+    "scrollY": "80vh",
+    "scrollCollapse": true,
+    "paging": false,
+    "stateSave": true,
+    });
+});
+</script>
+
+</head>
+
+{{ dt }} Discount: {{ discount_percent }}
+<table id="table-goods" class="display compact">
+<thead>
+            <tr>
+                <th>Name</th>
+                <th>Volume</th>
+                <th>Price 1kg</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Discount 1kg</th>
+                <th>Buy</th>
+                <th>Description</th>
+            </tr>
+</thead>
+<tbody>
+{% for title, row in data.items() %}
+    <tr>
+        <td>{{ row['title'] }}</td>
+        <td>{{ row['volume'] }}</td>
+        <td>{{ row['price_1'] }}</td>
+        <td>{{ row['price'] }}</td>
+        <td>
+        {% if row['discount'] %}
+            {{ row['discount'] }}
+        {% else %}
+            {{ row['price'] }}
+        {% endif %}
+        </td>
+        <td>
+        {% if row['discount_1'] %}
+            {{ row['discount_1'] }}
+        {% else %}
+            {{ row['price_1'] }}
+        {% endif %}
+        </td>
+
+        
+        <td><a href="{{ row['href'] }}" rel="noreferrer" target="_blank">
+            <img src='web-favicon.ico'/></a></td>
+        <td>{{ row['description'] }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>

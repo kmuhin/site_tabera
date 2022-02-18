@@ -1,0 +1,7 @@
+ipython
+pathlib
+bs4
+requests
+jinja2
+pycryptodome 
+pypiwin32
